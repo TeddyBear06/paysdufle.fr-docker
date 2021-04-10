@@ -1,0 +1,19 @@
+{
+    # Global options block. Entirely optional, https is on by default
+    # Optional email key for lets encrypt
+    email paysdufle@gmail.com
+}
+
+https://paysdufle.fr {
+    root website
+    file_server
+}
+
+https://tts.paysdufle.fr {
+    reverse_proxy * tts:8080
+}
+
+https://mp3.paysdufle.fr {
+    root mp3
+    file_server
+}

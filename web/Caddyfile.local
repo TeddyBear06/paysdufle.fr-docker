@@ -1,0 +1,17 @@
+{
+    # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+https://localhost {
+    root website
+    file_server
+}
+
+https://tts.localhost {
+    reverse_proxy * tts:8080
+}
+
+https://mp3.localhost {
+    root mp3
+    file_server
+}

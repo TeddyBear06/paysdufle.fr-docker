@@ -1,0 +1,49 @@
+version: "3.3"
+
+services:
+
+  website-builder:
+    build:
+      context: ./web
+    container_name: "website-builder"
+    environment:
+      - APP_ENV=${APP_ENV}
+      - TTS_DOMAIN=${TTS_DOMAIN}
+      - MP3_DOMAIN=${MP3_DOMAIN}
+    volumes:
+      - website_source:/usr/paysdufle.fr/src
+      - website_build:/usr/paysdufle.fr/build
+  
+  tts:
+    build:
+      context: ./tts
+    container_name: "tts"
+    restart: unless-stopped
+    environment:
+      - APP_ENV=${APP_ENV}
+    ports:
+      - "8080"
+    volumes:
+      - ./tts/src/mp3:/usr/src/app/mp3
+
+  website:
+    image: 'caddy:latest'
+    container_name: "website"
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./web/Caddyfile.${APP_ENV}:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+      - website_build:/srv/website
+      - ./tts/src/mp3:/srv/mp3
+    depends_on:
+      - "website-builder"
+
+volumes:
+  website_source:
+  website_build:
+  caddy_data:
+  caddy_config:
