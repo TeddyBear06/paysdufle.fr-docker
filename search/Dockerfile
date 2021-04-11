@@ -8,10 +8,10 @@ RUN apt-get update \
 
 COPY . /usr/src
 
-RUN chmod +x run.sh
-
 WORKDIR /usr/src
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+RUN chmod +x run.sh
 
 ENTRYPOINT ["./run.sh"]
