@@ -46,8 +46,6 @@ services:
     image: "prom/prometheus:latest"
     hostname: "prometheus"
     restart: always
-    networks:
-      - website_monitoring
     ports:
       - "9090:9090"
     user: nobody
@@ -68,8 +66,6 @@ services:
     image: "prom/blackbox-exporter:latest"
     hostname: "blackbox"
     restart: always
-    networks:
-      - website_monitoring
     ports:
       - "9115:9115"
     volumes:
@@ -83,6 +79,3 @@ volumes:
   caddy_data:
   caddy_config:
   prometheus_data:
-
-networks:
-  website_monitoring:
