@@ -49,16 +49,19 @@ if ($lecons->getCount()) {
 }
 
 $resultats = [
-    [
-        'text' => 'Thématiques',
-        'children' => $resultatsSousCategories,
-    ],
-    [
-        'text' => 'Leçons',
-        'children' => $resultatsLecons,
-    ],
+    'results' => [
+        [
+            'text' => 'Thématiques',
+            'children' => $resultatsSousCategories,
+        ],
+        [
+            'text' => 'Leçons',
+            'children' => $resultatsLecons,
+        ],
+    ]
 ];
 
 header('Content-type: application/json');
 header('Access-Control-Allow-Origin: https://paysdufle.fr');
+
 echo json_encode($resultats);
