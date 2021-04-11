@@ -13,6 +13,8 @@ services:
     volumes:
       - website_source:/usr/paysdufle.fr/src
       - website_build:/usr/paysdufle.fr/build
+    depends_on:
+      - "redis"
   
   tts:
     build:
@@ -42,8 +44,15 @@ services:
     depends_on:
       - "website-builder"
 
+  redis:
+    image: redislabs/redisearch:latest
+    container_name: "redis"
+    volumes: 
+      - redis_data:/data
+
 volumes:
   website_source:
   website_build:
   caddy_data:
   caddy_config:
+  redis_data:

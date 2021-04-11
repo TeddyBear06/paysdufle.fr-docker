@@ -8,7 +8,9 @@ RUN apt-get update \
         # gd
         libfreetype6-dev \
         libjpeg62-turbo-dev \
-        libpng-dev
+        libpng-dev \
+        # redis
+        redis-tools
 
 # Nouvelle syntaxe pour les paramètres (cf. https://github.com/docker-library/php/issues/945)
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
