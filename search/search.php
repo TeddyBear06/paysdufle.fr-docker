@@ -60,4 +60,5 @@ $resultats = [
 ];
 
 header('Content-type: application/json');
+header('Access-Control-Allow-Origin: https://paysdufle.fr');
 echo json_encode($resultats);
