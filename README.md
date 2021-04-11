@@ -5,7 +5,7 @@
 Pré-requis :
 
 ```bash
-$ ./run-portainer.sh
+$ ./portainer-run.sh
 ```
 
 [1/2] Ensuite, copier le fichier contenant les variables d'environnement :
@@ -19,7 +19,7 @@ $ cp .env.example .env
 [2/2] Construire et lancer les containers :
 
 ```bash
-$ docker-compose -p pfle up --build -d
+$ ./stack-run.sh
 ```
 
 Enjoy!
