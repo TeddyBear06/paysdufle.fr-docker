@@ -7,6 +7,10 @@ https://localhost {
     file_server
 }
 
+https://search.localhost {
+    reverse_proxy * search:8181
+}
+
 https://tts.localhost {
     reverse_proxy * tts:8080
 }

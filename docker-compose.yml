@@ -23,8 +23,6 @@ services:
     restart: unless-stopped
     environment:
       - APP_ENV=${APP_ENV}
-    ports:
-      - "8080"
     volumes:
       - ./tts/src/mp3:/usr/src/app/mp3
 
@@ -43,12 +41,18 @@ services:
       - ./tts/src/mp3:/srv/mp3
     depends_on:
       - "website-builder"
+      - "search"
 
   redis:
     image: redislabs/redisearch:latest
     container_name: "redis"
     volumes: 
       - redis_data:/data
+
+  search:
+    build:
+      context: ./search
+    container_name: "search"
 
 volumes:
   website_source:

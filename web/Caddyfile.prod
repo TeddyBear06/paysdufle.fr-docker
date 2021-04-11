@@ -9,6 +9,10 @@ https://paysdufle.fr {
     file_server
 }
 
+https://search.paysdufle.fr {
+    reverse_proxy * search:8181
+}
+
 https://tts.paysdufle.fr {
     reverse_proxy * tts:8080
 }
