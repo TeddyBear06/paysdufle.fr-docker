@@ -81,7 +81,7 @@ if (count($resultatsSousCategories) == 0) {
         'id' => 0,
         'text' => 'Aucun résultat...',
         'url' => '#',
-        "disabled": true
+        "disabled" => true
     ];
 }
 
@@ -90,7 +90,7 @@ if (count($resultatsLecons) == 0) {
         'id' => 0,
         'text' => 'Aucun résultat...',
         'url' => '#',
-        "disabled": true
+        "disabled" => true
     ];
 }
 
@@ -99,7 +99,7 @@ if (count($resultatsContenusLecons) == 0) {
         'id' => 0,
         'text' => 'Aucun résultat...',
         'url' => '#',
-        "disabled": true
+        "disabled" => true
     ];
 }
 
