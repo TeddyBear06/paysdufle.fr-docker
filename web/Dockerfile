@@ -21,6 +21,8 @@ RUN mkdir /usr/paysdufle.fr
 
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
+ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
+
 RUN git clone https://github.com/TeddyBear06/paysdufle.fr-site.git /usr/paysdufle.fr/src
 
 COPY ./run.sh .
