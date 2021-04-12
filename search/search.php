@@ -65,18 +65,14 @@ if ($lecons->getCount()) {
 }
 
 if ($contenusLecons->getCount()) {
-    $leconsDejaSuggerees = [];
     $leconIndex = 1;
     foreach ($contenusLecons->getDocuments() as $contenuLecon) {
-        if (! in_array($contenuLecon->label, $leconsDejaSuggerees)) {
-            $resultatsContenusLecons[] = [
-                'id' => $leconIndex,
-                'text' => $contenuLecon->tagComplet . ' [' . $contenuLecon->label . '] (' . $contenuLecon->categorie . ')',
-                'url' => $contenuLecon->url,
-            ];
-            $leconIndex++;
-            $leconsDejaSuggerees[] = $contenuLecon->label;
-        }
+        $resultatsContenusLecons[] = [
+            'id' => $leconIndex,
+            'text' => $contenuLecon->tagComplet . ' [' . $contenuLecon->label . '] (' . $contenuLecon->categorie . ')',
+            'url' => $contenuLecon->url,
+        ];
+        $leconIndex++;
     }
 }
 
