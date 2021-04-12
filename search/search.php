@@ -65,59 +65,46 @@ if ($lecons->getCount()) {
 }
 
 if ($contenusLecons->getCount()) {
+    $leconsDejaSuggerees = [];
     $leconIndex = 1;
     foreach ($contenusLecons->getDocuments() as $contenuLecon) {
-        $resultatsContenusLecons[] = [
-            'id' => $leconIndex,
-            'text' => $contenuLecon->label . ' (' . $contenuLecon->categorie . ')',
-            'url' => $contenuLecon->url,
-        ];
-        $leconIndex++;
+        if (! in_array($contenuLecon->label, $leconsDejaSuggerees)) {
+            $resultatsContenusLecons[] = [
+                'id' => $leconIndex,
+                'text' => $contenuLecon->tag . ' [' . $contenuLecon->label . '] (' . $contenuLecon->categorie . ')',
+                'url' => $contenuLecon->url,
+            ];
+            $leconIndex++;
+            $leconsDejaSuggerees[] = $contenuLecon->label;
+        }
     }
 }
 
-if (count($resultatsSousCategories) == 0) {
-    $resultatsSousCategories[] = [
-        'id' => 0,
-        'text' => 'Aucun résultat...',
-        'url' => '#',
-        "disabled" => true
+$results = [];
+
+if (count($resultatsSousCategories) > 0) {
+    $results[] = [
+        'text' => 'Thématiques',
+        'children' => $resultatsSousCategories,
     ];
 }
 
-if (count($resultatsLecons) == 0) {
-    $resultatsLecons[] = [
-        'id' => 0,
-        'text' => 'Aucun résultat...',
-        'url' => '#',
-        "disabled" => true
+if (count($resultatsLecons) > 0) {
+    $results[] = [
+        'text' => 'Leçons',
+        'children' => $resultatsLecons,
     ];
 }
 
-if (count($resultatsContenusLecons) == 0) {
-    $resultatsContenusLecons[] = [
-        'id' => 0,
-        'text' => 'Aucun résultat...',
-        'url' => '#',
-        "disabled" => true
+if (count($resultatsContenusLecons) > 0) {
+    $results[] = [
+        'text' => 'Tag de leçons',
+        'children' => $resultatsContenusLecons,
     ];
 }
 
 $resultats = [
-    'results' => [
-        [
-            'text' => 'Thématiques',
-            'children' => $resultatsSousCategories,
-        ],
-        [
-            'text' => 'Leçons',
-            'children' => $resultatsLecons,
-        ],
-        [
-            'text' => 'Contenus de leçons',
-            'children' => $resultatsContenusLecons,
-        ],
-    ]
+    'results' => $results
 ];
 
 header('Content-type: application/json');
