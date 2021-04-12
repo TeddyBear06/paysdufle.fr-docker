@@ -76,6 +76,33 @@ if ($contenusLecons->getCount()) {
     }
 }
 
+if (count($resultatsSousCategories) == 0) {
+    $resultatsSousCategories[] = [
+        'id' => 0,
+        'text' => 'Aucun résultat...',
+        'url' => '#',
+        "disabled": true
+    ];
+}
+
+if (count($resultatsLecons) == 0) {
+    $resultatsLecons[] = [
+        'id' => 0,
+        'text' => 'Aucun résultat...',
+        'url' => '#',
+        "disabled": true
+    ];
+}
+
+if (count($resultatsContenusLecons) == 0) {
+    $resultatsContenusLecons[] = [
+        'id' => 0,
+        'text' => 'Aucun résultat...',
+        'url' => '#',
+        "disabled": true
+    ];
+}
+
 $resultats = [
     'results' => [
         [
