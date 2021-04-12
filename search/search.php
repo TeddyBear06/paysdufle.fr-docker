@@ -71,7 +71,7 @@ if ($contenusLecons->getCount()) {
         if (! in_array($contenuLecon->label, $leconsDejaSuggerees)) {
             $resultatsContenusLecons[] = [
                 'id' => $leconIndex,
-                'text' => $contenuLecon->tag . ' [' . $contenuLecon->label . '] (' . $contenuLecon->categorie . ')',
+                'text' => $contenuLecon->tagComplet . ' [' . $contenuLecon->label . '] (' . $contenuLecon->categorie . ')',
                 'url' => $contenuLecon->url,
             ];
             $leconIndex++;
