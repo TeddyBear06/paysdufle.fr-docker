@@ -3,74 +3,45 @@
 # On charge les librairies
 require __DIR__ . '/vendor/autoload.php';
 
-use Ehann\RedisRaw\PredisAdapter;
-use Ehann\RediSearch\Index;
+use MeiliSearch\Client;
 
-# Client redis
-$redis = (new PredisAdapter())->connect('redis', 6379);
-$contenuIndex = new Index($redis, 'contenuIndex');
+$meilisearch_master_key = $_ENV["MEILISEARCH_MASTER_KEY"] ?? null;
+
+if ($meilisearch_master_key !== null) {
+    $client = new Client('http://meilisearch:7700', $meilisearch_master_key);
+    $subCategoriesIndex = $client->index('subCategories');
+    $lessonsIndex = $client->index('lessons');
+}
 
 $recherche = $_GET['term'];
 
-$cleanedTags = str_replace(['\'', '"', ',' , ';', '<', '>'], '', $recherche);
-$cleanedTags = str_replace(['-'], ' ', $recherche);
-
-$tags = explode(' ', $cleanedTags);
-$queryTags = [];
-
-foreach ($tags as $tag) {
-    $queryTags[] = $tag . '*';
-}
-
-$sousCategories = $contenuIndex
-    ->tagFilter('type', ['sousCategorie'])
-    ->search($recherche);
-
-$lecons = $contenuIndex
-    ->tagFilter('type', ['lecon'])
-    ->search($recherche);
-
-$contenusLecons = $contenuIndex
-    ->tagFilter('type', ['contenuLecon'])
-    ->tagFilter('tag', $queryTags)
-    ->search();
-
 $resultats = [];
 $resultatsSousCategories = [];
-$resultatsLecons = [];
 $resultatsContenusLecons = [];
 
-if ($sousCategories->getCount()) {
+$subCategories = $subCategoriesIndex->search($recherche)->getHits();
+
+if (! empty($subCategories)) {
     $sousCategorieIndex = 1;
-    foreach ($sousCategories->getDocuments() as $sousCategorie) {
+    foreach ($subCategories as $sousCategorie) {
         $resultatsSousCategories[] = [
             'id' => $sousCategorieIndex,
-            'text' => $sousCategorie->label . ' (' . $sousCategorie->categorie . ')',
-            'url' => $sousCategorie->url,
+            'text' => $sousCategorie['label'].' ('.$sousCategorie['categorie'].')',
+            'url' => $sousCategorie['url'],
         ];
         $sousCategorieIndex++;
     }
 }
 
-if ($lecons->getCount()) {
-    $leconIndex = 1;
-    foreach ($lecons->getDocuments() as $lecon) {
-        $resultatsLecons[] = [
-            'id' => $leconIndex,
-            'text' => $lecon->label . ' (' . $lecon->categorie . ')',
-            'url' => $lecon->url,
-        ];
-        $leconIndex++;
-    }
-}
+$lessons = $lessonsIndex->search($recherche)->getHits();
 
-if ($contenusLecons->getCount()) {
+if (! empty($lessons)) {
     $leconIndex = 1;
-    foreach ($contenusLecons->getDocuments() as $contenuLecon) {
+    foreach ($lessons as $contenuLecon) {
         $resultatsContenusLecons[] = [
             'id' => $leconIndex,
-            'text' => $contenuLecon->tagComplet . ' [' . $contenuLecon->label . '] (' . $contenuLecon->categorie . ')',
-            'url' => $contenuLecon->url,
+            'text' => $contenuLecon['label'].' ('.$contenuLecon['categorie'].')',
+            'url' => $contenuLecon['url'],
         ];
         $leconIndex++;
     }
@@ -85,16 +56,9 @@ if (count($resultatsSousCategories) > 0) {
     ];
 }
 
-if (count($resultatsLecons) > 0) {
-    $results[] = [
-        'text' => 'Leçons',
-        'children' => $resultatsLecons,
-    ];
-}
-
 if (count($resultatsContenusLecons) > 0) {
     $results[] = [
-        'text' => 'Tag de leçons',
+        'text' => 'Leçons',
         'children' => $resultatsContenusLecons,
     ];
 }

@@ -1,6 +1,7 @@
 {
     "require": {
-        "ethanhann/redisearch-php": "^1.9",
-        "predis/predis": "^1.1"
+        "meilisearch/meilisearch-php": "^0.17.2",
+        "guzzlehttp/guzzle": "^7.3",
+        "http-interop/http-factory-guzzle": "1.0"
     }
 }
