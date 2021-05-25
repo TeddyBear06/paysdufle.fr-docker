@@ -50,7 +50,6 @@ services:
     build:
       context: ./search
     environment:
-      - MEILI_ENV=${MEILI_ENV}
       - MEILISEARCH_MASTER_KEY=${MEILISEARCH_MASTER_KEY}
     networks:
       - pfle
