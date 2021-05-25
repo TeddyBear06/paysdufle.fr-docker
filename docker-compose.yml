@@ -9,7 +9,7 @@ services:
       - TTS_DOMAIN=${TTS_DOMAIN}
       - MP3_DOMAIN=${MP3_DOMAIN}
       - MEILISEARCH_MASTER_KEY=${MEILISEARCH_MASTER_KEY}
-      - MEILISEARCH_DOMAIN=${MEILISEARCH_DOMAIN}
+      - MEILISEARCH_ENDPOINT=${MEILISEARCH_ENDPOINT}
     volumes:
       - website_source:/usr/paysdufle.fr/src
       - website_build:/usr/paysdufle.fr/build

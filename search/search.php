@@ -72,7 +72,7 @@ $resultats = [
 header('Content-type: application/json');
 
 if ($meilisearch_env === 'local') {
-    header('Access-Control-Allow-Origin: https://localhost');
+    header('Access-Control-Allow-Origin: https://search.localhost');
 } else {
     header('Access-Control-Allow-Origin: https://paysdufle.fr');
 }
