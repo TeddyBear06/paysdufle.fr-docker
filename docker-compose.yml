@@ -9,6 +9,7 @@ services:
       - TTS_DOMAIN=${TTS_DOMAIN}
       - MP3_DOMAIN=${MP3_DOMAIN}
       - MEILISEARCH_MASTER_KEY=${MEILISEARCH_MASTER_KEY}
+      - MEILISEARCH_DOMAIN=${MEILISEARCH_DOMAIN}
     volumes:
       - website_source:/usr/paysdufle.fr/src
       - website_build:/usr/paysdufle.fr/build
@@ -50,6 +51,7 @@ services:
     build:
       context: ./search
     environment:
+      - MEILISEARCH_ENV=${MEILISEARCH_ENV}
       - MEILISEARCH_MASTER_KEY=${MEILISEARCH_MASTER_KEY}
     networks:
       - pfle

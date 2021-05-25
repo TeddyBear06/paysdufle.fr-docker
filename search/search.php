@@ -6,6 +6,7 @@ require __DIR__ . '/vendor/autoload.php';
 use MeiliSearch\Client;
 
 $meilisearch_master_key = $_ENV["MEILISEARCH_MASTER_KEY"] ?? null;
+$meilisearch_env = $_ENV["MEILISEARCH_ENV"] ?? null;
 
 if ($meilisearch_master_key !== null) {
     $client = new Client('http://meilisearch:7700', $meilisearch_master_key);
@@ -24,6 +25,7 @@ $subCategories = $subCategoriesIndex->search($recherche)->getHits();
 if (! empty($subCategories)) {
     $sousCategorieIndex = 1;
     foreach ($subCategories as $sousCategorie) {
+        var_dump($sousCategorie);
         $resultatsSousCategories[] = [
             'id' => $sousCategorieIndex,
             'text' => $sousCategorie['label'].' ('.$sousCategorie['categorie'].')',
@@ -68,6 +70,11 @@ $resultats = [
 ];
 
 header('Content-type: application/json');
-header('Access-Control-Allow-Origin: https://paysdufle.fr');
+
+if ($meilisearch_env === 'local') {
+    header('Access-Control-Allow-Origin: https://localhost');
+} else {
+    header('Access-Control-Allow-Origin: https://paysdufle.fr');
+}
 
 echo json_encode($resultats);
