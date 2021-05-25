@@ -25,7 +25,6 @@ $subCategories = $subCategoriesIndex->search($recherche)->getHits();
 if (! empty($subCategories)) {
     $sousCategorieIndex = 1;
     foreach ($subCategories as $sousCategorie) {
-        var_dump($sousCategorie);
         $resultatsSousCategories[] = [
             'id' => $sousCategorieIndex,
             'text' => $sousCategorie['label'].' ('.$sousCategorie['categorie'].')',
