@@ -41,7 +41,7 @@ if (! empty($lessons)) {
     foreach ($lessons as $contenuLecon) {
         $resultatsContenusLecons[] = [
             'id' => $leconIndex,
-            'text' => $contenuLecon['label'].' ('.$contenuLecon['categorie'].')',
+            'text' => $contenuLecon['titre'].' ('.$contenuLecon['categorie'].')',
             'url' => $contenuLecon['url'],
         ];
         $leconIndex++;

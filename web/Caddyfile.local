@@ -11,6 +11,10 @@ https://search.localhost {
     reverse_proxy * search:8181
 }
 
+https://meilisearch.localhost {
+    reverse_proxy * meilisearch:7700
+}
+
 https://tts.localhost {
     reverse_proxy * tts:8080
 }

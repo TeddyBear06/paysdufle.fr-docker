@@ -13,6 +13,10 @@ https://search.paysdufle.fr {
     reverse_proxy * search:8181
 }
 
+https://meilisearch.paysdufle.fr {
+    reverse_proxy * meilisearch:7700
+}
+
 https://tts.paysdufle.fr {
     reverse_proxy * tts:8080
 }
