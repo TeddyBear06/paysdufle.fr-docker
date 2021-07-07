@@ -68,6 +68,18 @@ services:
     networks:
       - pfle
 
+  rgpdcvcrpubsub:
+    image: redis/latest
+    ports:
+      - '6379'
+    networks:
+      - pfle
+    
+  rgpdcvc:
+
+  rgpdcvcgui:
+    
+
 networks:
   pfle:
       driver: bridge
