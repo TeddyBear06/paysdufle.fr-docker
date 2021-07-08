@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Statistiques Pays du FLE</title>
+    </head>
+    <body>
+        <div class="state">
+            <span class="users">?</span> en ligne actuellement.
+        </div>
+        <script>
+            var users = document.querySelector('.users'),
+                websocket = new WebSocket("ws://rgpdcvc:6789/");
+            websocket.onmessage = function (event) {
+                data = JSON.parse(event.data);
+                switch (data.type) {
+                    case 'users':
+                        users.textContent = (
+                            data.count.toString() + " utilisateur" +
+                            (data.count == 1 ? "" : "s"));
+                        break;
+                }
+            };
+        </script>
+    </body>
+</html>

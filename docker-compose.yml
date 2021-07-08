@@ -67,18 +67,22 @@ services:
         - 'meilisearch:/data.ms'
     networks:
       - pfle
-
-  rgpdcvcrpubsub:
-    image: redis/latest
-    ports:
-      - '6379'
-    networks:
-      - pfle
     
   rgpdcvc:
+    build:
+      context: ./rgpdcvc
+    ports:
+      - '8090'
+    networks:
+      - pfle
 
   rgpdcvcgui:
-    
+    build:
+      context: ./rgpdcvcgui
+    ports:
+      - '8089'
+    networks:
+      - pfle
 
 networks:
   pfle:

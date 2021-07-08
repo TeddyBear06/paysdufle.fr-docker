@@ -5,6 +5,6 @@ WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY server.py .
 
-CMD [ "python", "./your-daemon-or-script.py" ]
+CMD [ "python", "./server.py" ]

@@ -19,6 +19,10 @@ https://tts.localhost {
     reverse_proxy * tts:8080
 }
 
+https://stats.localhost {
+    reverse_proxy * rgpdcvcgui:8089
+}
+
 https://mp3.localhost {
     root mp3
     file_server
