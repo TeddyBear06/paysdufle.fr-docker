@@ -9,16 +9,13 @@
         </div>
         <script>
             var users = document.querySelector('.users'),
-                websocket = new WebSocket("ws://rgpdcvc:6789/");
+                websocket = new WebSocket("RGPDCVC_ENDPOINT");
             websocket.onmessage = function (event) {
                 data = JSON.parse(event.data);
-                switch (data.type) {
-                    case 'users':
-                        users.textContent = (
-                            data.count.toString() + " utilisateur" +
-                            (data.count == 1 ? "" : "s"));
-                        break;
-                }
+                users.textContent = (
+                    data.count.toString() + " utilisateur" +
+                    (data.count == 1 ? "" : "s")
+                );
             };
         </script>
     </body>

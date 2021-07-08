@@ -21,8 +21,12 @@ https://tts.paysdufle.fr {
     reverse_proxy * tts:8080
 }
 
+https://rgpdcvc.paysdufle.fr {
+    reverse_proxy / rgpdcvc:8090
+}
+
 https://stats.paysdufle.fr {
-    reverse_proxy * rgpdcvcgui:8089
+    reverse_proxy * rgpdcvcgui:80
 }
 
 https://mp3.paysdufle.fr {

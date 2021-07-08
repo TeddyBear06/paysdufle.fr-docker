@@ -11,6 +11,7 @@ services:
       - MEILISEARCH_MASTER_KEY=${MEILISEARCH_MASTER_KEY}
       - MEILISEARCH_INSTANCE=${MEILISEARCH_INSTANCE}
       - MEILISEARCH_ENDPOINT=${MEILISEARCH_ENDPOINT}
+      - RGPDCVC_ENDPOINT=${RGPDCVC_ENDPOINT}
     volumes:
       - website_source:/usr/paysdufle.fr/src
       - website_build:/usr/paysdufle.fr/build
@@ -79,8 +80,10 @@ services:
   rgpdcvcgui:
     build:
       context: ./rgpdcvcgui
+      args:
+        - RGPDCVC_ENDPOINT=${RGPDCVC_ENDPOINT}
     ports:
-      - '8089'
+      - '80'
     networks:
       - pfle
 

@@ -23,9 +23,9 @@ async def unregister(websocket):
 async def counter(websocket, path):
     await register(websocket)
     try:
-        await websocket.send(state_event())
+        await websocket.send(users_event())
         async for message in websocket:
-            # Nothing to do here
+            pass
     finally:
         await unregister(websocket)
 

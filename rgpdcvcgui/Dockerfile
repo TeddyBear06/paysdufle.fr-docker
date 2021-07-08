@@ -1,3 +1,9 @@
 FROM httpd:2.4
 
-COPY index.html /usr/local/apache2/htdocs/
+ARG RGPDCVC_ENDPOINT
+
+WORKDIR /usr/local/apache2/htdocs/
+
+COPY index.html .
+
+RUN sed -i "s|RGPDCVC_ENDPOINT|$RGPDCVC_ENDPOINT|g" index.html
