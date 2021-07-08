@@ -20,6 +20,11 @@ https://tts.localhost {
 }
 
 https://rgpdcvc.localhost {
+    header / {
+        Content-Security-Policy "
+            default-src https://localhost https://stats.localhost;
+        "
+    }
     reverse_proxy / rgpdcvc:8090
 }
 

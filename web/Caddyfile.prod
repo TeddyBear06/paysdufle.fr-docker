@@ -22,6 +22,11 @@ https://tts.paysdufle.fr {
 }
 
 https://rgpdcvc.paysdufle.fr {
+    header / {
+        Content-Security-Policy "
+            default-src https://paysdufle.fr https://stats.paysdufle.fr;
+        "
+    }
     reverse_proxy / rgpdcvc:8090
 }
 
