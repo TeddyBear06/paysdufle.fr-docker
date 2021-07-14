@@ -2,19 +2,44 @@
 <html>
     <head>
         <title>Statistiques Pays du FLE</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="animate.min.css" />
+        <style>
+            body {
+                background-color: #4582ec;
+                color: white;
+                font-weight: bold;
+            }
+            .container {
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
-        <div class="state">
-            <span class="users">?</span> en ligne actuellement.
+        <div class="container">
+            <h1>Statistiques</h1>
+            <br />
+            <h2 class="count">?</h2>
+            <p><span class="details"></span> en ligne</p> 
+        </div>
         </div>
         <script>
-            var users = document.querySelector('.users'),
+            var count = document.querySelector('.count'),
+                details = document.querySelector('.details'),
                 websocket = new WebSocket("RGPDCVC_ENDPOINT");
+
+            count.addEventListener('animationend', (event) => {
+                event.stopPropagation();
+                count.classList.remove('animate__animated', 'animate__heartBeat');
+            });
+
             websocket.onmessage = function (event) {
                 data = JSON.parse(event.data);
-                users.textContent = (
-                    data.count.toString() + " utilisateur" +
-                    (data.count == 1 ? "" : "s")
+                count.textContent = data.count.toString();
+                count.classList.add('animate__animated', 'animate__heartBeat');
+                details.textContent = (
+                    "utilisateur.trice" + (data.count == 1 ? "" : "s")
                 );
             };
         </script>
