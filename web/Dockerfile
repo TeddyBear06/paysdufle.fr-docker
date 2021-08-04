@@ -15,7 +15,7 @@ RUN apt-get update \
 # Nouvelle syntaxe pour les paramètres (cf. https://github.com/docker-library/php/issues/945)
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
-RUN docker-php-ext-install zip gd
+RUN docker-php-ext-install zip gd exif
 
 RUN mkdir /usr/paysdufle.fr
 
