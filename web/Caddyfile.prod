@@ -38,3 +38,5 @@ https://mp3.paysdufle.fr {
     root mp3
     file_server
 }
+
+encode gzip

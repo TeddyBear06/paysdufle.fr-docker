@@ -36,3 +36,5 @@ https://mp3.localhost {
     root mp3
     file_server
 }
+
+encode gzip
