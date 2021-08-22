@@ -7,6 +7,7 @@
 https://paysdufle.fr {
     root website
     file_server
+    encode gzip
 }
 
 https://search.paysdufle.fr {
@@ -38,5 +39,3 @@ https://mp3.paysdufle.fr {
     root mp3
     file_server
 }
-
-encode gzip
