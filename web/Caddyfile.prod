@@ -8,6 +8,10 @@ https://paysdufle.fr {
     root website
     file_server
     encode gzip
+    @cachedFiles {
+        path *.jpg *.jpeg *.png *.gif *.ico *.js *.css *.woff2
+    }
+    header @cachedFiles Cache-Control "public, max-age=604800, must-revalidate"
 }
 
 https://search.paysdufle.fr {
