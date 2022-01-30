@@ -60,7 +60,7 @@ services:
       - pfle
 
   meilisearch:
-    image: 'getmeili/meilisearch:latest'
+    image: 'getmeili/meilisearch:v0.25.2'
     command: ./meilisearch --master-key=${MEILISEARCH_MASTER_KEY} --no-analytics=true
     ports:
         - '7700'
