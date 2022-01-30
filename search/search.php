@@ -70,10 +70,4 @@ $resultats = [
 
 header('Content-type: application/json');
 
-if ($meilisearch_env === 'local') {
-    header('Access-Control-Allow-Origin: https://localhost');
-} else {
-    header('Access-Control-Allow-Origin: https://paysdufle.fr');
-}
-
 echo json_encode($resultats);
