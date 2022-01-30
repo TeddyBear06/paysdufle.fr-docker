@@ -18,6 +18,8 @@ https://localhost {
 
 https://search.localhost {
     import cors https://localhost
+    @allowPreFlight method OPTIONS
+    respond @allowPreFlight "Ok" 200
     reverse_proxy * search:8181
 }
 
