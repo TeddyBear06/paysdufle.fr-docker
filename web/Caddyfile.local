@@ -24,7 +24,9 @@ https://meilisearch.localhost {
     import cors https://localhost
     @allowPreFlight method OPTIONS
     respond @allowPreFlight "Ok" 200
-    reverse_proxy * meilisearch:7700
+    reverse_proxy * meilisearch:7700 {
+        header_down -Access-Control-Allow-Origin
+    }
 }
 
 https://tts.localhost {

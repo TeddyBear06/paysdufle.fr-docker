@@ -7,9 +7,9 @@
 (cors) {
     @origin header Origin {args.0}
     header @origin Access-Control-Allow-Origin "{args.0}"
-    header @origin Access-Control-Request-Method "PATCH, POST, GET, DELETE, PUT, OPTIONS"
-    header @origin Access-Control-Allow-Header "accept, origin, referer, accept-language, content-language, authorization, content-type"
-    header @origin Access-Control-Allow-Credentials: true
+    header @origin Access-Control-Allow-Methods *
+    header @origin Access-Control-Allow-Headers *
+    header @origin Access-Control-Allow-Credentials true
 }
 
 https://paysdufle.fr {
@@ -28,7 +28,11 @@ https://search.paysdufle.fr {
 
 https://meilisearch.paysdufle.fr {
     import cors https://paysdufle.fr
-    reverse_proxy * meilisearch:7700
+    @allowPreFlight method OPTIONS
+    respond @allowPreFlight "Ok" 200
+    reverse_proxy * meilisearch:7700 {
+        header_down -Access-Control-Allow-Origin
+    }
 }
 
 https://tts.paysdufle.fr {
