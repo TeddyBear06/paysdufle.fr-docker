@@ -2,6 +2,14 @@
     # acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
 }
 
+(cors) {
+    @origin header Origin {args.0}
+    header @origin Access-Control-Allow-Origin "{args.0}"
+    header @origin Access-Control-Request-Method "PATCH, POST, GET, DELETE, PUT, OPTIONS"
+    header @origin Access-Control-Allow-Header "accept, origin, referer, accept-language, content-language, authorization, content-type"
+    header @origin Access-Control-Allow-Credentials: true
+}
+
 https://localhost {
     root website
     file_server
@@ -13,6 +21,7 @@ https://search.localhost {
 }
 
 https://meilisearch.localhost {
+    import cors https://localhost
     reverse_proxy * meilisearch:7700
 }
 
