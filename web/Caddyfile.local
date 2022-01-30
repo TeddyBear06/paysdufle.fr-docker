@@ -17,6 +17,7 @@ https://localhost {
 }
 
 https://search.localhost {
+    import cors https://localhost
     reverse_proxy * search:8181
 }
 

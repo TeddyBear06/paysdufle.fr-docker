@@ -23,6 +23,7 @@ https://paysdufle.fr {
 }
 
 https://search.paysdufle.fr {
+    import cors https://paysdufle.fr
     reverse_proxy * search:8181
 }
 
